@@ -36,6 +36,17 @@ namespace Labyrinth
             vertices[count] = vertex;
             count++;
         }
+
+        public void AddVertices(TVertex [] vertexList)
+        {
+            foreach (TVertex vertex in vertexList)
+            {
+                if (count == vertices.Length)
+                    Array.Resize(ref vertices, count * 2);
+                vertices[count] = vertex;
+                count++;
+            }
+        }
         
         /// <summary>
         /// Bind buffer to GL context

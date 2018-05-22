@@ -21,17 +21,25 @@ namespace Labyrinth
         public Board()
         {
             // This is all tentative
-            VBuffer.AddVertex(new ColoredVertex(new Vector3(-2, -1, -2.5f), Color.BlanchedAlmond));
-            VBuffer.AddVertex(new ColoredVertex(new Vector3(-2, 1, -2.5f), Color.BlanchedAlmond));
-            VBuffer.AddVertex(new ColoredVertex(new Vector3(2, 1, -2.5f), Color.BlanchedAlmond));
-            VBuffer.AddVertex(new ColoredVertex(new Vector3(2, -1, -2.5f), Color.BlanchedAlmond));
-            VBuffer.AddVertex(new ColoredVertex(new Vector3(-2, -1, -1.5f), Color.Brown));
-            VBuffer.AddVertex(new ColoredVertex(new Vector3(-2, 1, -1.5f), Color.Brown));
-            VBuffer.AddVertex(new ColoredVertex(new Vector3(2, 1, -1.5f), Color.Brown));
-            VBuffer.AddVertex(new ColoredVertex(new Vector3(2, -1, -1.5f), Color.Brown));
+            // Vertex list
+            ColoredVertex[] vertices =
+            {
+                new ColoredVertex(new Vector3(-2, -1, -2.5f), Color.BlanchedAlmond),
+                new ColoredVertex(new Vector3(-2, 1, -2.5f), Color.BlanchedAlmond),
+                new ColoredVertex(new Vector3(2, 1, -2.5f), Color.BlanchedAlmond),
+                new ColoredVertex(new Vector3(2, -1, -2.5f), Color.BlanchedAlmond),
+                new ColoredVertex(new Vector3(-2, -1, -1.5f), Color.Brown),
+                new ColoredVertex(new Vector3(-2, 1, -1.5f), Color.Brown),
+                new ColoredVertex(new Vector3(2, 1, -1.5f), Color.Brown),
+                new ColoredVertex(new Vector3(2, -1, -1.5f), Color.Brown)
+            };
 
+            // Index list
             uint[] indices = { 0, 1, 2, 3, 7, 1, 5, 4, 7, 6, 2, 4, 0, 1 };
-            IBuffer.AddIndices(new List<uint>(indices));
+
+            // Add lists to buffers
+            VBuffer.AddVertices(vertices);
+            IBuffer.AddIndices(indices);
         }
 
         /// <summary>

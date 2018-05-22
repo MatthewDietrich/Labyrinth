@@ -23,9 +23,15 @@ namespace Labyrinth
             count++;
         }
 
-        public void AddIndices (List<uint> indexList)
+        public void AddIndices (uint[] indexList)
         {
-            foreach (uint index in indexList) AddIndex(index);
+            foreach (uint index in indexList)
+            {
+                if (count == indices.Length)
+                    Array.Resize(ref indices, count * 2);
+                indices[count] = index;
+                count++;
+            }
         }
 
         public void Bind() => GL.BindBuffer(BufferTarget.ElementArrayBuffer, handle);
