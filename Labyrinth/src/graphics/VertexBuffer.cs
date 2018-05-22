@@ -46,6 +46,7 @@ namespace Labyrinth
                 vertices[count] = vertex;
                 count++;
             }
+            System.Diagnostics.Debug.Print("{0}", count);
         }
         
         /// <summary>
