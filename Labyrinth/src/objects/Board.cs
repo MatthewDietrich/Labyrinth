@@ -11,6 +11,10 @@ namespace Labyrinth
     {
         private float xAngle;
         private float yAngle;
+        private readonly float xAngleMin;
+        private readonly float xAngleMax;
+        private readonly float yAngleMin;
+        private readonly float yAngleMax;
 
         public float XAngle { get => xAngle; set => xAngle = value; }
         public float YAngle { get => yAngle; set => yAngle = value; }
@@ -40,6 +44,11 @@ namespace Labyrinth
             // Add lists to buffers
             VBuffer.AddVertices(vertices);
             IBuffer.AddIndices(indices);
+
+            xAngleMin = -0.22f;
+            yAngleMin = -0.22f;
+            xAngleMax = 0.22f;
+            yAngleMax = 0.22f;
         }
 
         /// <summary>
@@ -50,7 +59,13 @@ namespace Labyrinth
         public void Tilt(Vector2 pos1, Vector2 pos2)
         {
             xAngle += 0.05f * (pos2.X - pos1.X);
-            yAngle += 0.05f *(pos2.Y - pos1.Y);
+            yAngle += 0.05f * (pos2.Y - pos1.Y);
+
+            if (xAngle > xAngleMax) xAngle = xAngleMax;
+            else if (xAngle < xAngleMin) xAngle = xAngleMin;
+
+            if (yAngle > yAngleMax) yAngle = yAngleMax;
+            else if (yAngle < yAngleMin) yAngle = yAngleMin;
         }
     }
 }
