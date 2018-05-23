@@ -34,7 +34,7 @@ namespace Labyrinth
             leftBound = -2.0f;
             rightBound = 2.0f;
 
-            topBound = -1.0f;
+            topBound = 1.0f;
             bottomBound = -1.0f;
 
             frontDepth = -1.5f;
