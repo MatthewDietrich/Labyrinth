@@ -5,19 +5,22 @@ namespace Labyrinth
     class MatrixHandler
     {
         private ShaderProgram program;
-        private Matrix4Uniform modelMatrix;
-        private Matrix4Uniform viewMatrix;
-        private Matrix4Uniform projectionMatrix;
+        private Matrix4 modelMatrix;
+        private Matrix4 viewMatrix;
+        private Matrix4 projectionMatrix;
+        private Matrix4Uniform modelViewProjectionMatrix;
 
-        internal Matrix4Uniform ModelMatrix { get => modelMatrix; set => modelMatrix = value; }
-        internal Matrix4Uniform ViewMatrix { get => viewMatrix; set => viewMatrix = value; }
-        internal Matrix4Uniform ProjectionMatrix { get => projectionMatrix; set => projectionMatrix = value; }
+        internal Matrix4 ModelMatrix { get => modelMatrix; set => modelMatrix = value; }
+        internal Matrix4 ViewMatrix { get => viewMatrix; set => viewMatrix = value; }
+        internal Matrix4 ProjectionMatrix { get => projectionMatrix; set => projectionMatrix = value; }
 
         public MatrixHandler(ShaderProgram program)
         {
-            ModelMatrix = new Matrix4Uniform("modelMatrix");
-            ViewMatrix = new Matrix4Uniform("viewMatrix");
-            ProjectionMatrix = new Matrix4Uniform("projectionMatrix");
+            ModelMatrix = new Matrix4();
+            ViewMatrix = new Matrix4();
+            ProjectionMatrix = new Matrix4();
+
+            modelViewProjectionMatrix = new Matrix4Uniform("modelViewProjectionMatrix");
 
             this.program = program;
         }
@@ -27,9 +30,8 @@ namespace Labyrinth
         /// </summary>
         public void SetAll()
         {
-            ModelMatrix.Set(program);
-            ViewMatrix.Set(program);
-            ProjectionMatrix.Set(program);
+            modelViewProjectionMatrix.Matrix = ModelMatrix * viewMatrix * projectionMatrix;
+            modelViewProjectionMatrix.Set(program);
         }
 
         /// <summary>
@@ -40,9 +42,9 @@ namespace Labyrinth
         /// <param name="z">Rotation around Z-Axis</param>
         public void rotateModelMatrix(float x, float y, float z)
         {
-            ModelMatrix.Matrix *= Matrix4.CreateRotationX(x);
-            ModelMatrix.Matrix *= Matrix4.CreateRotationY(y);
-            ModelMatrix.Matrix *= Matrix4.CreateRotationZ(z);
+            ModelMatrix *= Matrix4.CreateRotationX(x);
+            ModelMatrix *= Matrix4.CreateRotationY(y);
+            ModelMatrix *= Matrix4.CreateRotationZ(z);
         }
 
         /// <summary>
@@ -50,9 +52,20 @@ namespace Labyrinth
         /// </summary>
         public void Default()
         {
-            ModelMatrix.Matrix = Matrix4.Identity;
-            ViewMatrix.Matrix = Matrix4.Identity;
-            ProjectionMatrix.Matrix = Matrix4.CreatePerspectiveFieldOfView(MathHelper.PiOver2, 16f / 9, 0.1f, 100f);
+            // The model matrix is defined by objects, so its default is the identity matrix
+            ModelMatrix = Matrix4.Identity;
+
+            // Look at the middle of object space
+            ViewMatrix = Matrix4.LookAt(
+                eye: new Vector3(0, 0, 0.1f), // Position of eye in object space
+                target: new Vector3(0, 0, -100), // Point in object space to look at
+                up: new Vector3(0, 1, 0)); // Which way is up?
+
+            ProjectionMatrix = Matrix4.CreatePerspectiveFieldOfView(
+                fovy: MathHelper.PiOver2,
+                aspect: 16f / 9, // Aspect ratio. Probably shouldn't be hardcoded but I'll worry about that later
+                zNear: 0.001f, // Nearest visible depth
+                zFar: 100f); // Farthest visible depth
         }
     }
 }

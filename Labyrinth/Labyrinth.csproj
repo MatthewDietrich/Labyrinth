@@ -61,7 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IndexBuffer.cs" />
+    <Compile Include="src\graphics\IndexBuffer.cs" />
     <Compile Include="src\graphics\MatrixHandler.cs" />
     <Compile Include="src\graphics\Texture.cs" />
     <Compile Include="src\objects\Board.cs" />

@@ -44,7 +44,7 @@ namespace Labyrinth
                 new VertexAttribute("vColor", 4, VertexAttribPointerType.Float, ColoredVertex.Size, 12));
 
             matrixHandler = new MatrixHandler(shaderProgram);
-            matrixHandler.ProjectionMatrix.Matrix = Matrix4.CreatePerspectiveFieldOfView(MathHelper.PiOver2, 16f / 9, 0.1f, 100f);
+            matrixHandler.ProjectionMatrix = Matrix4.CreatePerspectiveFieldOfView(MathHelper.PiOver2, 16f / 9, 0.1f, 100f);
         }
 
         protected override void OnResize(EventArgs e)
