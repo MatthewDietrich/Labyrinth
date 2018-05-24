@@ -18,10 +18,15 @@ namespace Labyrinth
 
         private Vector2 currentMousePos;
         private Vector2 previousMousePos;
+
+        private int halfWidth, halfHeight;
+
         #endregion
 
-        public GameWindow() : base(1280, 720, GraphicsMode.Default, "Labyrinth", GameWindowFlags.Default, DisplayDevice.Default, 3, 0, GraphicsContextFlags.ForwardCompatible)
+        public GameWindow(int screenWidth, int screenHeight) : base(screenWidth, screenHeight, GraphicsMode.Default, "Labyrinth", GameWindowFlags.Default, DisplayDevice.Default, 3, 0, GraphicsContextFlags.ForwardCompatible)
         {
+            halfWidth = Width / 2;
+            halfHeight = Height / 2;
             Console.WriteLine("OpenGL version: " + GL.GetString(StringName.Version));
         }
 
@@ -66,8 +71,8 @@ namespace Labyrinth
             GL.ClearColor(Color4.CornflowerBlue);
             matrixHandler.Default(); // Reset default values of matrices
 
-            board.Tilt(previousMousePos, currentMousePos);
-            matrixHandler.rotateModelMatrix(board.XAngle, board.YAngle, 0);
+            board.Tilt(currentMousePos);
+            matrixHandler.rotateModelMatrix(board.YAngle, board.XAngle, 0);
 
             // Render frame
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit); // Clear screen
@@ -86,7 +91,8 @@ namespace Labyrinth
             base.OnMouseMove(e);
 
             previousMousePos = currentMousePos;
-            currentMousePos = new Vector2(e.Mouse.X, e.Mouse.Y);
+            currentMousePos = MouseShift(new Vector2(e.Mouse.X, e.Mouse.Y));
+            System.Diagnostics.Debug.Print("{0} {1}", currentMousePos.X, currentMousePos.Y);
         }
 
         /// <summary>
@@ -98,6 +104,16 @@ namespace Labyrinth
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, 0);
             GL.UseProgram(0);
+        }
+
+        private Vector2 MouseShift(Vector2 mousePos)
+        {
+            Vector2 shiftedMousePos = new Vector2();
+
+            shiftedMousePos.X = -(halfWidth - mousePos.X);
+            shiftedMousePos.Y = -(halfHeight - mousePos.Y);
+
+            return shiftedMousePos;
         }
     }
 }

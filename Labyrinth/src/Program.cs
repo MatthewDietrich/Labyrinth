@@ -10,7 +10,7 @@ namespace Labyrinth
     {
         static void Main(string[] args)
         {
-            GameWindow window = new GameWindow();
+            GameWindow window = new GameWindow(1280, 720);
             window.Run();
         }
     }

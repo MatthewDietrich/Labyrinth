@@ -40,10 +40,10 @@ namespace Labyrinth
             frontDepth = -1.5f;
             backDepth = -2.0f;
 
-            xAngleMin = -0.22f;
-            yAngleMin = -0.22f;
-            xAngleMax = 0.22f;
-            yAngleMax = 0.22f;
+            xAngleMin = -0.52f;
+            yAngleMin = -0.52f;
+            xAngleMax = 0.52f;
+            yAngleMax = 0.52f;
 
             // This is all tentative
             // Vertex list
@@ -64,10 +64,10 @@ namespace Labyrinth
         /// </summary>
         /// <param name="pos1">Previous mouse position</param>
         /// <param name="pos2">Current mouse position</param>
-        public void Tilt(Vector2 pos1, Vector2 pos2)
+        public void Tilt(Vector2 pos1)
         {
-            xAngle += 0.05f * (pos2.X - pos1.X);
-            yAngle += 0.05f * (pos2.Y - pos1.Y);
+            xAngle += 0.005f * (pos1.X);
+            yAngle += 0.005f * (pos1.Y);
             
             if (xAngle > xAngleMax) xAngle = xAngleMax;
             else if (xAngle < xAngleMin) xAngle = xAngleMin;
