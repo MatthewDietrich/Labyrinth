@@ -17,7 +17,7 @@ namespace Labyrinth
         private ShaderProgram shaderProgram;
         private VertexArray<ColoredVertex> vertexArray;
         private MatrixHandler matrixHandler;
-        private Board board;
+        private GameObjectList gameObjectList;
 
         private Vector2 currentMousePos;
 
@@ -36,7 +36,9 @@ namespace Labyrinth
         {
             base.OnLoad(e);
 
-            board = new Board(4.0f, 2.0f);
+            gameObjectList = new GameObjectList();
+
+            gameObjectList.Add(new Board(4.0f, 2.0f));
 
             // Read shader files and store them in the correct shader objects. Then initialize the shader program
             Shader vertexShader = new Shader(ShaderType.VertexShader, File.ReadAllText(@"..\..\shaders\vertex-shader.vs"));
@@ -44,7 +46,7 @@ namespace Labyrinth
             shaderProgram = new ShaderProgram(vertexShader, fragmentShader);
             
             //Store attributes from vertex shader in vertex array object
-            vertexArray = new VertexArray<ColoredVertex>(board.VBuffer, shaderProgram,
+            vertexArray = new VertexArray<ColoredVertex>(gameObjectList.CurrentBoard.VBuffer, shaderProgram,
                 new VertexAttribute("vPosition", 3, VertexAttribPointerType.Float, ColoredVertex.Size, 0),
                 new VertexAttribute("vColor", 4, VertexAttribPointerType.Float, ColoredVertex.Size, 12));
 
@@ -71,15 +73,15 @@ namespace Labyrinth
             matrixHandler.Default(); // Reset default values of matrices
 
             // Calculate angle of board
-            board.Tilt(currentMousePos);
-            matrixHandler.rotateModelMatrix(board.YAngle, board.XAngle, 0);
+            gameObjectList.CurrentBoard.Tilt(currentMousePos);
+            matrixHandler.rotateModelMatrix(gameObjectList.CurrentBoard.YAngle, gameObjectList.CurrentBoard.XAngle, 0);
 
             // Draw frame
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit); // Clear screen
             shaderProgram.Use(); // Use shader program
             matrixHandler.SetAll(); // Bind matrices to their variables in shader program
             vertexArray.Bind(); // Bind vertex array
-            board.Draw(); // Draw board
+            gameObjectList.Draw(); // Draw board
 
             UnbindAll(); // Unbind everything
 
