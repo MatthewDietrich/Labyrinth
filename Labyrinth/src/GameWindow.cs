@@ -17,7 +17,6 @@ namespace Labyrinth
         private Board board;
 
         private Vector2 currentMousePos;
-        private Vector2 previousMousePos;
 
         private int halfWidth, halfHeight;
 
@@ -37,7 +36,6 @@ namespace Labyrinth
             board = new Board();
 
             currentMousePos = new Vector2(0, 0);
-            previousMousePos = new Vector2(0, 0);
 
             Shader vertexShader = new Shader(ShaderType.VertexShader, File.ReadAllText(@"..\..\shaders\vertex-shader.vs"));
             Shader fragmentShader = new Shader(ShaderType.FragmentShader, File.ReadAllText(@"..\..\shaders\fragment-shader.fs"));
@@ -89,10 +87,7 @@ namespace Labyrinth
         protected override void OnMouseMove(MouseMoveEventArgs e)
         {
             base.OnMouseMove(e);
-
-            previousMousePos = currentMousePos;
             currentMousePos = MouseShift(new Vector2(e.Mouse.X, e.Mouse.Y));
-            System.Diagnostics.Debug.Print("{0} {1}", currentMousePos.X, currentMousePos.Y);
         }
 
         /// <summary>
