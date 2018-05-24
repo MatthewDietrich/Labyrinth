@@ -1,4 +1,6 @@
-﻿#version 130
+﻿/* Vertex Shader */
+
+#version 130
 
 uniform mat4 modelViewProjectionMatrix;
 

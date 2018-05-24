@@ -37,6 +37,10 @@ namespace Labyrinth
             count++;
         }
 
+        /// <summary>
+        /// Insert an array of vertices into the buffer
+        /// </summary>
+        /// <param name="vertexList">Array of vertex objects to add</param>
         public void AddVertices(TVertex [] vertexList)
         {
             foreach (TVertex vertex in vertexList)

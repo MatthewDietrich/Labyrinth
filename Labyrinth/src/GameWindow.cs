@@ -8,6 +8,9 @@ using OpenTK.Input;
 
 namespace Labyrinth
 {
+    /// <summary>
+    /// Stores all information about the window in which the game runs. Handles input and frame rendering
+    /// </summary>
     sealed class GameWindow : OpenTK.GameWindow
     {
         #region private_members
@@ -33,21 +36,19 @@ namespace Labyrinth
         {
             base.OnLoad(e);
 
-            board = new Board();
+            board = new Board(4.0f, 2.0f);
 
-            currentMousePos = new Vector2(0, 0);
-
+            // Read shader files and store them in the correct shader objects. Then initialize the shader program
             Shader vertexShader = new Shader(ShaderType.VertexShader, File.ReadAllText(@"..\..\shaders\vertex-shader.vs"));
             Shader fragmentShader = new Shader(ShaderType.FragmentShader, File.ReadAllText(@"..\..\shaders\fragment-shader.fs"));
-
             shaderProgram = new ShaderProgram(vertexShader, fragmentShader);
-
+            
+            //Store attributes from vertex shader in vertex array object
             vertexArray = new VertexArray<ColoredVertex>(board.VBuffer, shaderProgram,
                 new VertexAttribute("vPosition", 3, VertexAttribPointerType.Float, ColoredVertex.Size, 0),
                 new VertexAttribute("vColor", 4, VertexAttribPointerType.Float, ColoredVertex.Size, 12));
 
             matrixHandler = new MatrixHandler(shaderProgram);
-            matrixHandler.ProjectionMatrix = Matrix4.CreatePerspectiveFieldOfView(MathHelper.PiOver2, 16f / 9, 0.1f, 100f);
         }
 
         protected override void OnResize(EventArgs e)
@@ -69,15 +70,16 @@ namespace Labyrinth
             GL.ClearColor(Color4.CornflowerBlue);
             matrixHandler.Default(); // Reset default values of matrices
 
+            // Calculate angle of board
             board.Tilt(currentMousePos);
             matrixHandler.rotateModelMatrix(board.YAngle, board.XAngle, 0);
 
-            // Render frame
+            // Draw frame
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit); // Clear screen
             shaderProgram.Use(); // Use shader program
             matrixHandler.SetAll(); // Bind matrices to their variables in shader program
             vertexArray.Bind(); // Bind vertex array
-            board.Draw(); // Draw
+            board.Draw(); // Draw board
 
             UnbindAll(); // Unbind everything
 
@@ -101,14 +103,14 @@ namespace Labyrinth
             GL.UseProgram(0);
         }
 
+        /// <summary>
+        /// Shift the origin of a given mouse position from the top-left of the screen to the center of the screen
+        /// </summary>
+        /// <param name="mousePos">Window coordinates of mouse cursor relative to origin at top-left of screen</param>
+        /// <returns>Window coordinates of mouse cursor relative to origin at center of screen</returns>
         private Vector2 MouseShift(Vector2 mousePos)
         {
-            Vector2 shiftedMousePos = new Vector2();
-
-            shiftedMousePos.X = -(halfWidth - mousePos.X);
-            shiftedMousePos.Y = -(halfHeight - mousePos.Y);
-
-            return shiftedMousePos;
+            return new Vector2(-(halfWidth - mousePos.X), -(halfHeight - mousePos.Y));
         }
     }
 }

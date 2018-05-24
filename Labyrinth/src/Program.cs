@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Labyrinth
 {
+    /// <summary>
+    /// An open-source Labyrinth game using OpenTK
+    /// </summary>
     class Program
     {
         static void Main(string[] args)

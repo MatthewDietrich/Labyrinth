@@ -1,4 +1,6 @@
-﻿#version 130
+﻿/* Fragment shader */
+
+#version 130
 
 in vec4 fColor;
 
