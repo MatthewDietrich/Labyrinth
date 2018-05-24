@@ -66,8 +66,8 @@ namespace Labyrinth
         /// <param name="pos2">Current mouse position</param>
         public void Tilt(Vector2 pos1)
         {
-            xAngle += 0.005f * (pos1.X);
-            yAngle += 0.005f * (pos1.Y);
+            xAngle = 0.005f * (pos1.X);
+            yAngle = 0.005f * (pos1.Y);
             
             if (xAngle > xAngleMax) xAngle = xAngleMax;
             else if (xAngle < xAngleMin) xAngle = xAngleMin;
