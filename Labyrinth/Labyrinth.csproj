@@ -70,6 +70,7 @@
     <Compile Include="src\graphics\ColoredVertex.cs" />
     <Compile Include="src\GameWindow.cs" />
     <Compile Include="src\graphics\Matrix4Uniform.cs" />
+    <Compile Include="src\objects\GameObjectList.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\graphics\Shader.cs" />
