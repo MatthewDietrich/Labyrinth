@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using OpenTK;
 
 namespace Labyrinth
@@ -62,8 +61,8 @@ namespace Labyrinth
             uint[] indices = BufferGenerator.CubeIndices();
 
             // Add lists to buffers
-            VBuffer.AddVertices(vertices);
-            IBuffer.AddIndices(indices);
+            VBuffer.Add(vertices);
+            IBuffer.Add(indices);
         }
 
         /// <summary>
