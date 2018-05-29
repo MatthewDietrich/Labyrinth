@@ -10,7 +10,7 @@ namespace Labyrinth
     /// </summary>
     struct ColoredVertex
     {
-        public const int Size = (3 + 4) * 4;
+        public const int Size = (3 + 4) * 4; // (3 floats in Vector3 + 4 floats in Color 4) * 4 bytes per float
 
         private readonly Vector3 position;
         private readonly Color4 color;
