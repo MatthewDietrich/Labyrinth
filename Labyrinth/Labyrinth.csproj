@@ -65,6 +65,7 @@
     <Compile Include="src\graphics\IndexBuffer.cs" />
     <Compile Include="src\graphics\MatrixHandler.cs" />
     <Compile Include="src\graphics\Texture.cs" />
+    <Compile Include="src\objects\Ball.cs" />
     <Compile Include="src\objects\Board.cs" />
     <Compile Include="src\objects\GameObject.cs" />
     <Compile Include="src\graphics\ColoredVertex.cs" />

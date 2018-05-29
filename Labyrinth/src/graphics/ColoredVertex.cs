@@ -15,6 +15,8 @@ namespace Labyrinth
         private readonly Vector3 position;
         private readonly Color4 color;
 
+        public Vector3 Position { get { return position; } }
+
         /// <summary>
         /// A vertex with position and color information associated with it
         /// </summary>
