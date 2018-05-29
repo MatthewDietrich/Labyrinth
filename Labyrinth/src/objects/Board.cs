@@ -62,8 +62,8 @@ namespace Labyrinth
             uint[] indices = BufferGenerator.CubeIndices();
 
             // Add lists to buffers
-            VBuffer.AddVertices(vertices);
-            IBuffer.AddIndices(indices);
+            VBuffer.Add(vertices);
+            IBuffer.Add(indices);
         }
 
         /// <summary>

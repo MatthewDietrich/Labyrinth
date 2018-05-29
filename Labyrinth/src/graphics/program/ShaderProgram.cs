@@ -2,7 +2,7 @@
 
 namespace Labyrinth
 {
-    class ShaderProgram
+    sealed class ShaderProgram
     {
         private readonly int handle;
 

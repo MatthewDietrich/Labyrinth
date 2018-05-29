@@ -2,7 +2,7 @@
 
 namespace Labyrinth
 {
-    class MatrixHandler
+    sealed class MatrixHandler
     {
         private ShaderProgram program;
         private Matrix4 modelMatrix;

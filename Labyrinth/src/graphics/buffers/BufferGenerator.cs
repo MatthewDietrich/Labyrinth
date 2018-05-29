@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace Labyrinth
 {
-    class BufferGenerator
+    sealed class BufferGenerator
     {
         public static ColoredVertex[] CubeVertices(float frontDepth, float backDepth, float topBound, float bottomBound, float rightBound, float leftBound,
             Color color)
