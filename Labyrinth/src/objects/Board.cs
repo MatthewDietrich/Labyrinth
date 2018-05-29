@@ -56,8 +56,7 @@ namespace Labyrinth
 
             // Vertex list
             ColoredVertex[] vertices = BufferGenerator.CubeVertices(
-                frontDepth, backDepth, topBound, bottomBound, rightBound, leftBound,
-                Color.AliceBlue, Color.AntiqueWhite, Color.Aqua, Color.Bisque, Color.Thistle, Color.SpringGreen);
+                frontDepth, backDepth, topBound, bottomBound, rightBound, leftBound, Color.Magenta);
 
             // Index list
             uint[] indices = BufferGenerator.CubeIndices();

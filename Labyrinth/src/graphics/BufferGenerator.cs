@@ -6,45 +6,45 @@ namespace Labyrinth
     class BufferGenerator
     {
         public static ColoredVertex[] CubeVertices(float frontDepth, float backDepth, float topBound, float bottomBound, float rightBound, float leftBound,
-            Color frontColor, Color backColor, Color topColor, Color bottomColor, Color rightColor, Color leftColor)
+            Color color)
         {
             ColoredVertex[] vertices =
            {
                 // front
-                new ColoredVertex(new Vector3(leftBound, bottomBound, frontDepth), frontColor),
-                new ColoredVertex(new Vector3(rightBound, bottomBound, frontDepth), frontColor),
-                new ColoredVertex(new Vector3(rightBound, topBound, frontDepth), frontColor),
-                new ColoredVertex(new Vector3(leftBound, topBound, frontDepth), frontColor),
+                new ColoredVertex(new Vector3(leftBound, bottomBound, frontDepth), color),
+                new ColoredVertex(new Vector3(rightBound, bottomBound, frontDepth), color),
+                new ColoredVertex(new Vector3(rightBound, topBound, frontDepth), color),
+                new ColoredVertex(new Vector3(leftBound, topBound, frontDepth), color),
 
                 // back
-                new ColoredVertex(new Vector3(leftBound, bottomBound, backDepth), backColor),
-                new ColoredVertex(new Vector3(leftBound, topBound, backDepth), backColor),
-                new ColoredVertex(new Vector3(rightBound, topBound, backDepth), backColor),
-                new ColoredVertex(new Vector3(rightBound, bottomBound, backDepth), backColor),
+                new ColoredVertex(new Vector3(leftBound, bottomBound, backDepth), color),
+                new ColoredVertex(new Vector3(leftBound, topBound, backDepth), color),
+                new ColoredVertex(new Vector3(rightBound, topBound, backDepth), color),
+                new ColoredVertex(new Vector3(rightBound, bottomBound, backDepth), color),
 
                 // top
-                new ColoredVertex(new Vector3(leftBound, topBound, backDepth), topColor),
-                new ColoredVertex(new Vector3(leftBound, topBound, frontDepth), topColor),
-                new ColoredVertex(new Vector3(rightBound, topBound, frontDepth), topColor),
-                new ColoredVertex(new Vector3(rightBound, topBound, backDepth), topColor),
+                new ColoredVertex(new Vector3(leftBound, topBound, backDepth), color),
+                new ColoredVertex(new Vector3(leftBound, topBound, frontDepth), color),
+                new ColoredVertex(new Vector3(rightBound, topBound, frontDepth), color),
+                new ColoredVertex(new Vector3(rightBound, topBound, backDepth), color),
 
                 // bottom
-                new ColoredVertex(new Vector3(leftBound, bottomBound, backDepth), bottomColor),
-                new ColoredVertex(new Vector3(rightBound, bottomBound, backDepth), bottomColor),
-                new ColoredVertex(new Vector3(rightBound, bottomBound, frontDepth), bottomColor),
-                new ColoredVertex(new Vector3(leftBound, bottomBound, frontDepth), bottomColor),
+                new ColoredVertex(new Vector3(leftBound, bottomBound, backDepth), color),
+                new ColoredVertex(new Vector3(rightBound, bottomBound, backDepth), color),
+                new ColoredVertex(new Vector3(rightBound, bottomBound, frontDepth), color),
+                new ColoredVertex(new Vector3(leftBound, bottomBound, frontDepth), color),
 
                 // right
-                new ColoredVertex(new Vector3(rightBound, topBound, backDepth), rightColor),
-                new ColoredVertex(new Vector3(rightBound, topBound, frontDepth), rightColor),
-                new ColoredVertex(new Vector3(rightBound, bottomBound, frontDepth), rightColor),
-                new ColoredVertex(new Vector3(rightBound, bottomBound, backDepth), rightColor),
+                new ColoredVertex(new Vector3(rightBound, topBound, backDepth), color),
+                new ColoredVertex(new Vector3(rightBound, topBound, frontDepth), color),
+                new ColoredVertex(new Vector3(rightBound, bottomBound, frontDepth), color),
+                new ColoredVertex(new Vector3(rightBound, bottomBound, backDepth), color),
 
                 // left
-                new ColoredVertex(new Vector3(leftBound, bottomBound, backDepth), leftColor),
-                new ColoredVertex(new Vector3(leftBound, bottomBound, frontDepth), leftColor),
-                new ColoredVertex(new Vector3(leftBound, topBound, frontDepth), leftColor),
-                new ColoredVertex(new Vector3(leftBound, topBound, backDepth), leftColor)
+                new ColoredVertex(new Vector3(leftBound, bottomBound, backDepth), color),
+                new ColoredVertex(new Vector3(leftBound, bottomBound, frontDepth), color),
+                new ColoredVertex(new Vector3(leftBound, topBound, frontDepth), color),
+                new ColoredVertex(new Vector3(leftBound, topBound, backDepth), color)
             };
 
             return vertices;
