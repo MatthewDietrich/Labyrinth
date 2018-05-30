@@ -71,7 +71,7 @@ namespace Labyrinth
         /// </summary>
         /// <param name="segments">Number of segments to divide the polyhedron into</param>
         /// <returns>List of vertices</returns>
-        public static ColoredVertex[] RegularPolyhedronVertices(int segments, Color color)
+        public static ColoredVertex[] RegularPolyhedronVertices(int segments, float factor, Color color)
         {
             List<ColoredVertex> vertices = new List<ColoredVertex>();
 
@@ -113,10 +113,10 @@ namespace Labyrinth
                     sinTheta1 = (float)Math.Sin(theta1);
                     sinTheta2 = (float)Math.Sin(theta2);
 
-                    vertices.Add(new ColoredVertex(new Vector3(cosTheta1 * sinPhi1, sinTheta1 * sinPhi1, cosPhi1), color));
-                    vertices.Add(new ColoredVertex(new Vector3(cosTheta1 * sinPhi2, sinTheta1 * sinPhi2, cosPhi2), color));
-                    vertices.Add(new ColoredVertex(new Vector3(cosTheta2 * sinPhi2, sinTheta2 * sinPhi2, cosPhi2), color));
-                    vertices.Add(new ColoredVertex(new Vector3(cosTheta2 * sinPhi1, sinTheta2 * sinPhi1, cosPhi1), color));
+                    vertices.Add(new ColoredVertex(new Vector3(factor * (cosTheta1 * sinPhi1), factor * (sinTheta1 * sinPhi1), factor * (cosPhi1)), color));
+                    vertices.Add(new ColoredVertex(new Vector3(factor * (cosTheta1 * sinPhi2), factor * (sinTheta1 * sinPhi2), factor * (cosPhi2)), color));
+                    vertices.Add(new ColoredVertex(new Vector3(factor * (cosTheta2 * sinPhi2), factor * (sinTheta2 * sinPhi2), factor * (cosPhi2)), color));
+                    vertices.Add(new ColoredVertex(new Vector3(factor * (cosTheta2 * sinPhi1), factor * (sinTheta2 * sinPhi1), factor * (cosPhi1)), color));
                 }
             }
 
@@ -132,8 +132,10 @@ namespace Labyrinth
         {
             List<uint> indices = new List<uint>();
 
-            for (uint i = 0; i < Math.Pow(2.0 * segments, 2.0); i++)
+            for (uint i = 0; i < Math.Pow(2.0 * segments, 2.0); i ++)
+            {
                 indices.Add(i);
+            }
 
             return indices.ToArray();
         }

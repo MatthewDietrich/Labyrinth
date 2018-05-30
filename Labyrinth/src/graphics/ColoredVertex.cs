@@ -25,5 +25,7 @@ namespace Labyrinth
             this.position = position;
             this.color = color;
         }
+
+        public Vector3 Position => position;
     }
 }

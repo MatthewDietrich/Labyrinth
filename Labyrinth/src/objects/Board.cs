@@ -57,12 +57,12 @@ namespace Labyrinth
             /*ColoredVertex[] vertices = BufferGenerator.CubeVertices(
                 frontDepth, backDepth, topBound, bottomBound, rightBound, leftBound, Color.Magenta);*/
 
-            ColoredVertex[] vertices = BufferGenerator.RegularPolyhedronVertices(10, Color.Magenta);
+            ColoredVertex[] vertices = BufferGenerator.RegularPolyhedronVertices(30, 0.05f, Color.Magenta);
 
             // Index list
             //uint[] indices = BufferGenerator.CubeIndices();
 
-            uint[] indices = BufferGenerator.RegularPolyhedronIndices(10);
+            uint[] indices = BufferGenerator.RegularPolyhedronIndices(30);
 
             // Add lists to buffers
             VBuffer.Add(vertices);
