@@ -20,7 +20,7 @@
         /// <summary>
         /// Draw the vertices and indices needed to display the object on the screen
         /// </summary>
-        public void Draw()
+        public virtual void Draw()
         {
             // Bind and buffer vertex buffer
             vBuffer.Bind();

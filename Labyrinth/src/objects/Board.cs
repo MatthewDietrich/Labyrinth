@@ -54,15 +54,11 @@ namespace Labyrinth
             yAngleMax = 0.52f;
 
             // Vertex list
-            /*ColoredVertex[] vertices = BufferGenerator.CubeVertices(
-                frontDepth, backDepth, topBound, bottomBound, rightBound, leftBound, Color.Magenta);*/
-
-            ColoredVertex[] vertices = BufferGenerator.RegularPolyhedronVertices(30, 0.05f, Color.Magenta);
+            ColoredVertex[] vertices = BufferGenerator.CubeVertices(
+                frontDepth, backDepth, topBound, bottomBound, rightBound, leftBound, Color.Magenta);
 
             // Index list
-            //uint[] indices = BufferGenerator.CubeIndices();
-
-            uint[] indices = BufferGenerator.RegularPolyhedronIndices(30);
+            uint[] indices = BufferGenerator.CubeIndices();
 
             // Add lists to buffers
             VBuffer.Add(vertices);
