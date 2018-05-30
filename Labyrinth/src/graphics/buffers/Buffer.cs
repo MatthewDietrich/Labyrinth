@@ -35,6 +35,18 @@ namespace Labyrinth
             }
         }
 
+        protected T[] GetSubArray(int begin, int end)
+        {
+            T[] subArray = new T[end - begin];
+
+            for (int i = begin; i < end; i++)
+            {
+                subArray[i - begin] = bufferItems[i];
+            }
+
+            return subArray;
+        }
+
         /// <summary>
         /// Bind buffer to GL context
         /// </summary>

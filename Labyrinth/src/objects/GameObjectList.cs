@@ -10,9 +10,17 @@ namespace Labyrinth
 
         public Board CurrentBoard { get { return currentBoard; } }
 
+        public VertexBuffer<ColoredVertex> VBuffer { get; private set; }
+        public IndexBuffer IBuffer { get; private set; }
+
+        private int vertexOffset;
+        private int indexOffset;
+
         public GameObjectList()
         {
             gameObjects = new List<GameObject>();
+            VBuffer = new VertexBuffer<ColoredVertex>(ColoredVertex.Size);
+            IBuffer = new IndexBuffer();
         }
         
         /// <summary>
@@ -22,12 +30,20 @@ namespace Labyrinth
         public void Add(GameObject gameObject)
         {
             gameObjects.Add(gameObject);
+            gameObject.VertexOffset = vertexOffset;
+            gameObject.IndexOffset = indexOffset;
+
+            VBuffer.Add(gameObject.Vertices);
+            IBuffer.Add(gameObject.Indices);
 
             // Keep track of most recent board added
             if (gameObject.GetType() == typeof(Board))
             {
                 currentBoard = (Board)gameObject;
             }
+
+            vertexOffset += gameObject.Vertices.Length;
+            indexOffset += gameObject.Indices.Length;
         }
 
         /// <summary>
@@ -37,7 +53,13 @@ namespace Labyrinth
         {
             foreach (var gameObject in gameObjects)
             {
-                gameObject.Draw();
+                VBuffer.Bind();
+                VBuffer.BufferSubData(gameObject.VertexOffset, gameObject.Vertices.Length);
+
+                IBuffer.Bind();
+                IBuffer.BufferSubData(gameObject.IndexOffset, gameObject.Indices.Length);
+
+                IBuffer.Draw();
             }
         }
 

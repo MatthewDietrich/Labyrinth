@@ -12,22 +12,8 @@ namespace Labyrinth
     {
         public Ball()
         {
-            ColoredVertex[] vertices = BufferGenerator.RegularPolyhedronVertices(30, 0.05f, Color.Orange);
-            uint[] indices = BufferGenerator.RegularPolyhedronIndices(30);
-        }
-
-        public override void Draw()
-        {
-            // Bind and buffer vertex buffer
-            VBuffer.Bind();
-            VBuffer.BufferData();
-
-            // Bind and buffer index buffer
-            IBuffer.Bind();
-            IBuffer.BufferData();
-
-            // Draw indices
-            IBuffer.Draw(PrimitiveType.TriangleFan);
+            Vertices = BufferGenerator.RegularPolyhedronVertices(30, 0.05f, Color.Orange);
+            Indices = BufferGenerator.RegularPolyhedronIndices(30);
         }
     }
 }

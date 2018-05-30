@@ -10,5 +10,11 @@ namespace Labyrinth
 
         public override void Draw() => GL.DrawElements(PrimitiveType.Triangles, count, DrawElementsType.UnsignedInt, 0);
         public void Draw(PrimitiveType primitiveType) => GL.DrawElements(primitiveType, count, DrawElementsType.UnsignedInt, 0);
+
+        public void BufferSubData(int offset, int size)
+        {
+            uint[] subArray = GetSubArray(offset, size);
+            GL.BufferSubData(BufferTarget.ElementArrayBuffer, (IntPtr)offset, size * sizeof(uint), subArray);
+        }
     }
 }

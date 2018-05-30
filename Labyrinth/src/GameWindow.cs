@@ -47,7 +47,7 @@ namespace Labyrinth
             shaderProgram = new ShaderProgram(vertexShader, fragmentShader);
             
             //Store attributes from vertex shader in vertex array object
-            vertexArray = new VertexArray<ColoredVertex>(gameObjectList.CurrentBoard.VBuffer, shaderProgram,
+            vertexArray = new VertexArray<ColoredVertex>(gameObjectList.VBuffer, shaderProgram,
                 new VertexAttribute("vPosition", 3, VertexAttribPointerType.Float, ColoredVertex.Size, 0),
                 new VertexAttribute("vColor", 4, VertexAttribPointerType.Float, ColoredVertex.Size, 12));
 

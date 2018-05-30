@@ -2,6 +2,7 @@
 
 using OpenTK.Graphics.OpenGL;
 using System;
+using System.Linq;
 
 namespace Labyrinth
 {
@@ -33,5 +34,11 @@ namespace Labyrinth
         /// Draw buffered data
         /// </summary>
         public override void Draw() => GL.DrawArrays(PrimitiveType.Triangles, 0, count);
+
+        public void BufferSubData(int offset, int size)
+        {
+            TVertex[] subArray = GetSubArray(offset, size);
+            GL.BufferSubData(BufferTarget.ElementArrayBuffer, (IntPtr)offset, size * sizeof(uint), subArray);
+        }
     }
 }
