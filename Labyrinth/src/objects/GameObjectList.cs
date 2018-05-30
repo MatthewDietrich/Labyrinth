@@ -21,6 +21,9 @@ namespace Labyrinth
             gameObjects = new List<GameObject>();
             VBuffer = new VertexBuffer<ColoredVertex>(ColoredVertex.Size);
             IBuffer = new IndexBuffer();
+
+            vertexOffset = 0;
+            indexOffset = 0;
         }
         
         /// <summary>
