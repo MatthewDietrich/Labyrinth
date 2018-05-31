@@ -45,6 +45,7 @@ namespace Labyrinth
                 currentBoard = (Board)gameObject;
             }
 
+            System.Diagnostics.Debug.Print("Offsets: v:{0}, i:{1}", vertexOffset, indexOffset);
             vertexOffset += gameObject.Vertices.Length;
             indexOffset += gameObject.Indices.Length;
         }

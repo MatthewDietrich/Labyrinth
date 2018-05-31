@@ -50,16 +50,27 @@ namespace Labyrinth
         /// <summary>
         /// Bind buffer to GL context
         /// </summary>
-        public virtual void Bind() => throw new NotImplementedException("Bind() must be called on a subclass of Buffer.");
+        public virtual void Bind() =>
+            throw new NotImplementedException("Bind() must be called on a subclass of Buffer.");
 
         /// <summary>
         /// Put data in buffer
         /// </summary>
-        public virtual void BufferData() => throw new NotImplementedException("BufferData must be called on a subclass of Buffer.");
+        public virtual void BufferData() =>
+            throw new NotImplementedException("BufferData must be called on a subclass of Buffer.");
 
         /// <summary>
         /// Draw buffered data
         /// </summary>
-        public virtual void Draw() => throw new NotImplementedException("Draw() must be called on a subclass of Buffer.");
+        public virtual void Draw() =>
+            throw new NotImplementedException("Draw() must be called on a subclass of Buffer.");
+
+        /// <summary>
+        /// Put subset of data in buffer
+        /// </summary>
+        /// <param name="offset">Offset of beginning of data</param>
+        /// <param name="size">Number of data points</param>
+        public virtual void BufferSubData(int offset, int size) =>
+            throw new NotImplementedException("BufferSubData must be called on a subclass of Buffer");
     }
 }

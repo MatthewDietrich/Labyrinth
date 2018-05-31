@@ -35,10 +35,10 @@ namespace Labyrinth
         /// </summary>
         public override void Draw() => GL.DrawArrays(PrimitiveType.Triangles, 0, count);
 
-        public void BufferSubData(int offset, int size)
+        public override void BufferSubData(int offset, int size)
         {
-            TVertex[] subArray = GetSubArray(offset, size);
-            GL.BufferSubData(BufferTarget.ElementArrayBuffer, (IntPtr)offset, size * sizeof(uint), subArray);
+            TVertex[] subArray = GetSubArray(offset, size + offset);
+            GL.BufferSubData(BufferTarget.ElementArrayBuffer, (IntPtr)(offset * vertexSize), size * sizeof(uint), subArray);
         }
     }
 }

@@ -13,8 +13,9 @@ namespace Labyrinth
 
         public void BufferSubData(int offset, int size)
         {
-            uint[] subArray = GetSubArray(offset, size);
-            GL.BufferSubData(BufferTarget.ElementArrayBuffer, (IntPtr)offset, size * sizeof(uint), subArray);
+            uint[] subArray = GetSubArray(offset, size + offset);
+            GL.BufferSubData(BufferTarget.ElementArrayBuffer, (IntPtr)(offset*sizeof(uint)), size * sizeof(uint), subArray);
+            System.Diagnostics.Debug.Print("Buffered: o:{0}, s:{1}", (IntPtr)offset, size);
         }
     }
 }
