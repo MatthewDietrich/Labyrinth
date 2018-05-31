@@ -63,7 +63,7 @@ namespace Labyrinth
                 IBuffer.Bind();
                 IBuffer.BufferSubData(gameObject.IndexOffset, gameObject.Indices.Length);
 
-                IBuffer.Draw();
+                IBuffer.Draw(gameObject.Indices.Length);
             }
         }
 
