@@ -3,22 +3,25 @@ using System.Collections.Generic;
 
 namespace Labyrinth
 {
+    /// <summary>
+    /// List of objects in the game world. Handles placing them in buffers, as well as drawing them.
+    /// </summary>
     class GameObjectList : IEnumerable<GameObject>
     {
         private List<GameObject> gameObjects;
-        private Board currentBoard;
 
-        public Board CurrentBoard { get { return currentBoard; } }
+        public Board CurrentBoard { get; private set; }
 
         public VertexBuffer<ColoredVertex> VBuffer { get; private set; }
         public IndexBuffer IBuffer { get; private set; }
 
-        private int vertexOffset;
-        private int indexOffset;
+        private int vertexOffset; // Position in vertex buffer to place first vertex of next object
+        private int indexOffset; // Position in index buffer to place first index of next object
 
         public GameObjectList()
         {
             gameObjects = new List<GameObject>();
+
             VBuffer = new VertexBuffer<ColoredVertex>(ColoredVertex.Size);
             IBuffer = new IndexBuffer();
 
@@ -33,6 +36,7 @@ namespace Labyrinth
         public void Add(GameObject gameObject)
         {
             gameObjects.Add(gameObject);
+
             gameObject.VertexOffset = vertexOffset;
             gameObject.IndexOffset = indexOffset;
 
@@ -41,13 +45,24 @@ namespace Labyrinth
 
             // Keep track of most recent board added
             if (gameObject.GetType() == typeof(Board))
-            {
-                currentBoard = (Board)gameObject;
-            }
+                CurrentBoard = (Board)gameObject;
 
-            System.Diagnostics.Debug.Print("Offsets: v:{0}, i:{1}", vertexOffset, indexOffset);
             vertexOffset += gameObject.Vertices.Length;
             indexOffset += gameObject.Indices.Length;
+        }
+
+        public void PrepareBuffers()
+        {
+            int totalVertices = 0;
+            int totalIndices = 0;
+            foreach (var gameObject in gameObjects)
+            {
+                totalVertices += gameObject.Vertices.Length;
+                totalIndices += gameObject.Vertices.Length;
+            }
+
+            VBuffer.Prepare(totalVertices);
+            IBuffer.Prepare(totalVertices);
         }
 
         /// <summary>
@@ -55,15 +70,16 @@ namespace Labyrinth
         /// </summary>
         public void Draw()
         {
+            // Iterate through list of objects, drawing each one indifidually
             foreach (var gameObject in gameObjects)
             {
-                VBuffer.Bind();
-                VBuffer.BufferSubData(gameObject.VertexOffset, gameObject.Vertices.Length);
+                VBuffer.Bind(); // Bind vertex buffer
+                VBuffer.BufferSubData(gameObject.VertexOffset, gameObject.Vertices.Length); // Put vertices in vertex buffer
 
-                IBuffer.Bind();
-                IBuffer.BufferSubData(gameObject.IndexOffset, gameObject.Indices.Length);
+                IBuffer.Bind(); // Bind index buffer
+                IBuffer.BufferSubData(gameObject.IndexOffset, gameObject.Indices.Length); // Put vertices in index buffer
 
-                IBuffer.Draw(gameObject.Indices.Length);
+                IBuffer.Draw(gameObject.Indices.Length); // Draw objects by indices
             }
         }
 

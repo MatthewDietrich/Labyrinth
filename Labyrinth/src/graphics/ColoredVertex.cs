@@ -12,8 +12,8 @@ namespace Labyrinth
     {
         public const int Size = (3 + 4) * 4; // (3 floats in Vector3 + 4 floats in Color 4) * 4 bytes per float
 
-        private readonly Vector3 position;
-        private readonly Color4 color;
+        public Vector3 Position { get; }
+        public Color4 Color { get; }
 
         /// <summary>
         /// A vertex with position and color information associated with it
@@ -22,10 +22,8 @@ namespace Labyrinth
         /// <param name="color">Color of vertex</param>
         public ColoredVertex(Vector3 position, Color4 color)
         {
-            this.position = position;
-            this.color = color;
+            Position = position;
+            Color = color;
         }
-
-        public Vector3 Position => position;
     }
 }

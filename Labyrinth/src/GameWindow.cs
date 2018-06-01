@@ -41,6 +41,8 @@ namespace Labyrinth
             gameObjectList.Add(new Board(4.0f, 2.0f));
             gameObjectList.Add(new Ball());
 
+            gameObjectList.PrepareBuffers();
+
             // Read shader files and store them in the correct shader objects. Then initialize the shader program
             Shader vertexShader = new Shader(ShaderType.VertexShader, File.ReadAllText(@"..\..\shaders\vertex-shader.vs"));
             Shader fragmentShader = new Shader(ShaderType.FragmentShader, File.ReadAllText(@"..\..\shaders\fragment-shader.fs"));
